@@ -2,7 +2,7 @@
 
 # Plot an inSVert simulated VCF as a Circos-style structural-variant overview.
 # Usage:
-#   R_LIBS_USER=viz/Rlib Rscript viz/plot_circlize.R \
+#    Rscript viz/plot_circlize.R \
 #     viz/simulated.vcf data/human/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai \
 #     viz/insvert_sv_circos [--title "Plot title"] [--format pdf png svg]
 
@@ -156,7 +156,8 @@ draw_plot <- function() {
         link$destination_chrom, c(link$destination_start, link$destination_end),
         col = adjustcolor(sv_colors[[link$type]], alpha.f = 0.34),
         border = adjustcolor(sv_colors[[link$type]], alpha.f = 0.65),
-        lwd = 0.35
+        lwd = 0.35, directional = 1,
+        arr.type = "triangle", arr.length = 0.12, arr.width = 0.06
       )
     }
   }

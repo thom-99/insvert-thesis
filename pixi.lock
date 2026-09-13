@@ -118,6 +118,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/r-cpp11-0.5.5-r45h785f33e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/r-ggplot2-4.0.3-r45h785f33e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/r-globaloptions-0.1.4-r45ha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/r-gridgraphics-0.5_1-r45hc72bb7e_4.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/r-gtable-0.3.6-r45hc72bb7e_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/r-labeling-0.4.3-r45hc72bb7e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/r-lifecycle-1.0.5-r45hc72bb7e_0.conda
@@ -1734,6 +1735,17 @@ packages:
   run_exports: {}
   size: 492656
   timestamp: 1775659560861
+- conda: https://conda.anaconda.org/conda-forge/noarch/r-gridgraphics-0.5_1-r45hc72bb7e_4.conda
+  sha256: 3909cf9470f0277068c927f8f40ef5f07483ff63f4259123ae597dac8529566c
+  md5: 258d2a7ca8a0daaab462d552103e7af7
+  depends:
+  - r-base >=4.5,<4.6.0a0
+  license: GPL (>= 2)
+  license_family: GPL3
+  purls: []
+  run_exports: {}
+  size: 263151
+  timestamp: 1757642021632
 - conda: https://conda.anaconda.org/conda-forge/noarch/r-gtable-0.3.6-r45hc72bb7e_1.conda
   sha256: fcd2601af8213f39af6f720e22c8f858b3451f8e3d93cbc9e6aedb2d6f88483e
   md5: f686123cfba49e6299fae7e029a40266
