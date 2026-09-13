@@ -1,0 +1,4 @@
+notes_on_inSVert.md
+# pixi environments
+.pixi/*
+!.pixi/config.toml
