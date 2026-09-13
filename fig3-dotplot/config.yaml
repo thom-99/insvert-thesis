@@ -1,0 +1,64 @@
+genome:
+  ploidy: 1
+  heterozygosity: 0.0
+
+variants:
+  DEL:
+    count: 10
+    distribution: normal
+    parameters:
+      median_length: 75000
+      sigma: 20000
+      min_length: 40000
+      max_length: 130000
+
+  INS:
+    count: 10
+    distribution: normal
+    parameters:
+      median_length: 70000
+      sigma: 18000
+      min_length: 40000
+      max_length: 120000
+
+  DUP:
+    count: 8
+    distribution: normal
+    parameters:
+      median_length: 75000
+      sigma: 20000
+      min_length: 40000
+      max_length: 130000
+    copy_number:
+      min: 2
+      max: 4
+      weights: [0.75, 0.20, 0.05]
+
+  INV:
+    count: 10
+    distribution: normal
+    parameters:
+      median_length: 125000
+      sigma: 30000
+      min_length: 65000
+      max_length: 200000
+
+  TRA_COPY:
+    count: 6
+    distribution: normal
+    reverse_ratio: 0.5
+    parameters:
+      median_length: 100000
+      sigma: 25000
+      min_length: 50000
+      max_length: 170000
+
+  TRA_CUT:
+    count: 6
+    distribution: normal
+    reverse_ratio: 0.5
+    parameters:
+      median_length: 100000
+      sigma: 25000
+      min_length: 50000
+      max_length: 170000

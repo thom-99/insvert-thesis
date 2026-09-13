@@ -1,0 +1,15 @@
+# inSVert simulation configuration
+
+genome:
+  ploidy: 2
+  heterozygosity: 0.5
+
+variants:
+  INS:
+    count: 1000
+    distribution: pareto
+    parameters:
+      median_length: 10000
+      min_length: 50
+      max_length: 100000
+      sigma: 
