@@ -1,6 +1,6 @@
 [workspace]
 authors = ["thom <thomasdimarz@gmail.com>"]
-channels = ["conda-forge"]
+channels = ["conda-forge", "bioconda"]
 name = "insvert-thesis"
 platforms = ["linux-64"]
 version = "0.1.0"
@@ -14,6 +14,7 @@ r-circlize = ">=0.4.18,<0.5"
 r-ggplot2 = ">=4.0.3,<5"
 r-patchwork = ">=1.3.2,<2"
 r-gridgraphics = ">=0.5_1,<0.6"
+minimap2 = ">=2.31,<3"
 
 [pypi-dependencies]
 insvert = { git = "https://github.com/thom-99/inSVert.git" }

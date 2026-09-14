@@ -3,3 +3,13 @@ notes_on_inSVert.md
 .pixi/*
 !.pixi/config.toml
 data/
+
+# Reproducible simulation and alignment files. Keep the plotted figures.
+fig1-circos/simulated.vcf
+fig2-distributions/simulated_*.vcf
+fig3-dotplot/simulated.vcf*
+fig3-dotplot/inserted.vcf*
+fig3-dotplot/simulated.fa*
+fig3-dotplot/*.paf
+fig3-dotplot/*.paf.gz
+fig3-dotplot/*.minimap2.log

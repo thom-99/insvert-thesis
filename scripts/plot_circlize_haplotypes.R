@@ -242,7 +242,7 @@ draw_plot <- function(haplotype) {
     }
   }
 
-  title(paste("haplotype", haplotype), line = 1, cex.main = 1.05)
+  title(paste("haplotype", haplotype), line = 1, cex.main = 1.25)
   circos.clear()
 }
 
@@ -264,7 +264,7 @@ legend_items <- lapply(seq_along(legend_labels), function(i) {
     ),
     grid::textGrob(
       legend_labels[[i]], x = 0.45, just = "left",
-      gp = grid::gpar(fontsize = 9)
+      gp = grid::gpar(fontsize = 13)
     ),
     vp = grid::viewport(layout.pos.col = i)
   )
@@ -272,7 +272,7 @@ legend_items <- lapply(seq_along(legend_labels), function(i) {
 legend_grob <- grid::gTree(
   children = do.call(grid::gList, legend_items),
   vp = grid::viewport(
-    x = 0.5, width = 0.50,
+    x = 0.5, width = 0.65,
     layout = grid::grid.layout(nrow = 1, ncol = length(legend_labels))
   )
 )

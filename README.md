@@ -15,16 +15,41 @@ the configfile is provided in the relative figure folder
 ```bash
 # generate the synthetic VCF
 pixi run inSVert simulate fig1-circos/config.yaml data/Homo_sapiens.GRCh38.dna.primary_assembly.fa --seed 123 -o fig1-circos/simulated.vcf
+
 # plot the synthetic variants
 pixi run Rscript scripts/plot_circlize.R fig1-circos/simulated.vcf data/Homo_sapiens.GRCh38.dna.primary_assembly.fa.fai fig1-circos/fig1 --format png
 ```
 
-## fig 2 : dot plot
-
+## fig2 : distributions
 
 ```bash
-# generate the synthetic VCF
-pixi run inSVert simulate fig2-dotplot/config.yaml data/cerevisiae_test.fa --seed 123 -o fig2-dotplot/simulated.vcf
-# insert variants into a synthetic genome
-pixi run inSVert insert data/cerevisiae_test.fa fig2-dotplot/simulated.vcf --ploidy 1 -o fig2-dotplot/simulated.fa
+# Generate the normal and Pareto distributions.
+pixi run inSVert simulate fig2-distributions/config_normal.yaml data/Homo_sapiens.GRCh38.dna.primary_assembly.fa --seed 123 -o fig2-distributions/simulated_normal.vcf
+
+pixi run inSVert simulate fig2-distributions/config_pareto.yaml data/Homo_sapiens.GRCh38.dna.primary_assembly.fa --seed 123 -o fig2-distributions/simulated_pareto.vcf
+
+# Plot the distributions.
+pixi run Rscript scripts/plot_distributions.R fig2-distributions/simulated_normal.vcf fig2-distributions/simulated_pareto.vcf -o fig2-distributions
+```
+
+## fig3 : dotplot
+
+```bash
+# Generate synthetic VCF
+pixi run inSVert simulate fig3-dotplot/config.yaml data/cerevisiae_test.fa --seed 123 -o fig3-dotplot/simulated.vcf
+
+# Insert variant in the genome
+pixi run inSVert insert data/cerevisiae_test.fa fig3-dotplot/simulated.vcf --ploidy 1 -o fig3-dotplot/simulated.fa --truth-vcf fig3-dotplot/inserted.vcf
+
+# Align the edited genome and the unchanged reference to the reference.
+# -c records gaps within alignments, which the plot needs to show insertions and deletions.
+pixi run minimap2 -cx asm5 -t 4 data/cerevisiae_test.fa fig3-dotplot/simulated.fa > fig3-dotplot/simulated-vs-reference.paf
+
+pixi run minimap2 -cx asm5 -t 4 data/cerevisiae_test.fa data/cerevisiae_test.fa > fig3-dotplot/reference-vs-reference.paf
+
+# Dotplot of the edited genome against reference
+pixi run Rscript fig3-dotplot/dotplot.R fig3-dotplot/simulated-vs-reference.paf -o fig3-dotplot/simulated-dotplot --format svg --display-contigs
+
+# Dotplot of reference against reference (control)
+pixi run Rscript fig3-dotplot/dotplot.R fig3-dotplot/reference-vs-reference.paf -o fig3-dotplot/control-dotplot --format svg --display-contigs
 ```

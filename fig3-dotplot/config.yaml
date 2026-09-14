@@ -4,7 +4,7 @@ genome:
 
 variants:
   DEL:
-    count: 10
+    count: 50
     distribution: normal
     parameters:
       median_length: 75000
@@ -13,7 +13,7 @@ variants:
       max_length: 130000
 
   INS:
-    count: 10
+    count: 50
     distribution: normal
     parameters:
       median_length: 70000
@@ -22,7 +22,7 @@ variants:
       max_length: 120000
 
   DUP:
-    count: 8
+    count: 30
     distribution: normal
     parameters:
       median_length: 75000
@@ -35,7 +35,7 @@ variants:
       weights: [0.75, 0.20, 0.05]
 
   INV:
-    count: 10
+    count: 30
     distribution: normal
     parameters:
       median_length: 125000
@@ -44,7 +44,7 @@ variants:
       max_length: 200000
 
   TRA_COPY:
-    count: 6
+    count: 20
     distribution: normal
     reverse_ratio: 0.5
     parameters:
@@ -54,7 +54,7 @@ variants:
       max_length: 170000
 
   TRA_CUT:
-    count: 6
+    count: 20
     distribution: normal
     reverse_ratio: 0.5
     parameters:
