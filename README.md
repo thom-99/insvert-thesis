@@ -48,8 +48,11 @@ pixi run minimap2 -cx asm5 -t 4 data/cerevisiae_test.fa fig3-dotplot/simulated.f
 pixi run minimap2 -cx asm5 -t 4 data/cerevisiae_test.fa data/cerevisiae_test.fa > fig3-dotplot/reference-vs-reference.paf
 
 # Dotplot of the edited genome against reference
-pixi run Rscript fig3-dotplot/dotplot.R fig3-dotplot/simulated-vs-reference.paf -o fig3-dotplot/simulated-dotplot --format svg --display-contigs
+pixi run Rscript scripts/dotplot.R fig3-dotplot/simulated-vs-reference.paf -o fig3-dotplot/simulated-dotplot --format png --display-contigs
 
 # Dotplot of reference against reference (control)
-pixi run Rscript fig3-dotplot/dotplot.R fig3-dotplot/reference-vs-reference.paf -o fig3-dotplot/control-dotplot --format svg --display-contigs
+pixi run Rscript scripts/dotplot.R fig3-dotplot/reference-vs-reference.paf -o fig3-dotplot/control-dotplot --format png --display-contigs
+
+# Control and edited genome side by side
+pixi run Rscript scripts/compare_dotplots.R fig3-dotplot/reference-vs-reference.paf fig3-dotplot/simulated-vs-reference.paf -o fig3-dotplot/control-vs-simulated-dotplot.png
 ```

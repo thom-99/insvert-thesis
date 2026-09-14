@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # Run from the main project folder (uses ggplot2 from the pixi environment):
-# pixi run Rscript fig3-dotplot/dotplot.R fig3-dotplot/simulated-vs-reference.paf -o fig3-dotplot/simulated-dotplot --format svg --display-contigs
+# pixi run Rscript scripts/dotplot.R fig3-dotplot/simulated-vs-reference.paf -o fig3-dotplot/simulated-dotplot --format png --display-contigs
 # Add --title "Genome comparison" for an optional title.
 # Positions and possible structural variants (SVs) are measured in the query genome
 # relative to the reference genome. Colors suggest events; they do not prove them.
@@ -209,9 +209,9 @@ make_segments <- function(p, min_sv) {
 
 # Draw the same classified regions in each requested format. Styling below does
 # not change which regions were selected or how their possible SV types were assigned.
-plot_dotplot <- function(p, s, opt, all_p = p) {
+plot_dotplot <- function(p, s, opt, all_p = p, x_limit = NULL, y_limit = NULL) {
   if (!requireNamespace('ggplot2', quietly = TRUE))
-    stop('ggplot2 is required. Run with: pixi run Rscript fig3-dotplot/dotplot.R ...')
+    stop('ggplot2 is required. Run with: pixi run Rscript scripts/dotplot.R ...')
   library(ggplot2)
   palette <- c(COLLINEAR = '#000000', INS = '#009E73', DEL = '#E41A1C',
                DUP = '#E69F00', INV = '#0072B2', TRA = '#8E44AD', OTHER = '#999999')
@@ -223,6 +223,9 @@ plot_dotplot <- function(p, s, opt, all_p = p) {
   tl <- lengths_for(targets, 't', 'tlen'); ql <- lengths_for(queries, 'q', 'qlen')
   to <- setNames(c(0, head(cumsum(tl), -1)), targets)
   qo <- setNames(c(0, head(cumsum(ql), -1)), queries)
+  # A comparison can supply shared limits so that the two panels use the same scale.
+  if (is.null(x_limit)) x_limit <- sum(tl)
+  if (is.null(y_limit)) y_limit <- sum(ql)
   # Add the preceding sequence lengths, then convert base positions to megabases.
   s$x0 <- (s$x0 + to[s$t]) / 1e6; s$x1 <- (s$x1 + to[s$t]) / 1e6
   s$y0 <- (s$y0 + qo[s$q]) / 1e6; s$y1 <- (s$y1 + qo[s$q]) / 1e6
@@ -241,9 +244,9 @@ plot_dotplot <- function(p, s, opt, all_p = p) {
     scale_linetype_manual(values = c('FALSE' = 'solid', 'TRUE' = 'dashed'), guide = 'none') +
     # Line widths: 0.6 for black matches and 1.0 for colored or ambiguous regions.
     scale_linewidth_manual(values = c('FALSE' = 0.6, 'TRUE' = 1.0), guide = 'none') +
-    scale_x_continuous(limits = c(0, sum(tl)) / 1e6, expand = expansion(mult = 0.01),
+    scale_x_continuous(limits = c(0, x_limit) / 1e6, expand = expansion(mult = 0.01),
       sec.axis = if (opt$display_contigs) dup_axis(breaks = (to + tl / 2) / 1e6, labels = targets, name = NULL) else waiver()) +
-    scale_y_continuous(limits = c(0, sum(ql)) / 1e6, expand = expansion(mult = 0.01),
+    scale_y_continuous(limits = c(0, y_limit) / 1e6, expand = expansion(mult = 0.01),
       sec.axis = if (opt$display_contigs) dup_axis(breaks = (qo + ql / 2) / 1e6, labels = queries, name = NULL) else waiver()) +
     labs(x = 'Reference position (Mb)', y = 'Query position (Mb)', title = opt$title, colour = NULL) +
     theme_classic(base_size = 12) +
